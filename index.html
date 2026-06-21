@@ -14,8 +14,6 @@
             --border: #ddd;
             --card-hover: #eaeaea;
             --avatar-border: #e0e0e0;
-            --particle: rgba(0, 0, 0, 0.06);
-            --particle-line: rgba(0, 0, 0, 0.04);
             --transition-duration: 0.4s;
         }
 
@@ -28,8 +26,6 @@
             --border: #222;
             --card-hover: #1a1a1a;
             --avatar-border: #333;
-            --particle: rgba(255, 255, 255, 0.04);
-            --particle-line: rgba(255, 255, 255, 0.03);
         }
 
         * {
@@ -46,14 +42,12 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
             padding: 40px 20px;
             transition: background-color var(--transition-duration) ease, color var(--transition-duration) ease;
             position: relative;
             overflow-x: hidden;
         }
 
-        /* Canvas 背景 */
         #bg-canvas {
             position: fixed;
             top: 0;
@@ -65,14 +59,14 @@
         }
 
         .container {
-            max-width: 600px;
+            max-width: 640px;
             width: 100%;
             text-align: center;
             position: relative;
             z-index: 1;
         }
 
-        /* 主题切换 - 精致 Toggle */
+        /* Theme Toggle */
         .theme-toggle {
             position: fixed;
             top: 24px;
@@ -114,27 +108,16 @@
             width: 12px;
             height: 12px;
             transition: opacity 0.2s;
-        }
-
-        .toggle-icon-sun {
             position: absolute;
-            opacity: 1;
         }
 
-        .toggle-icon-moon {
-            position: absolute;
-            opacity: 0;
-        }
+        .toggle-icon-sun { opacity: 1; }
+        .toggle-icon-moon { opacity: 0; }
 
-        [data-theme="dark"] .toggle-icon-sun {
-            opacity: 0;
-        }
+        [data-theme="dark"] .toggle-icon-sun { opacity: 0; }
+        [data-theme="dark"] .toggle-icon-moon { opacity: 1; }
 
-        [data-theme="dark"] .toggle-icon-moon {
-            opacity: 1;
-        }
-
-        /* 头像 */
+        /* Avatar */
         .avatar {
             width: 80px;
             height: 80px;
@@ -145,9 +128,9 @@
             transition: border-color var(--transition-duration) ease;
         }
 
-        /* 标题区域 */
+        /* Header */
         .header {
-            margin-bottom: 80px;
+            margin-bottom: 60px;
         }
 
         .name {
@@ -183,7 +166,7 @@
             transition: color var(--transition-duration) ease;
         }
 
-        /* 统计数据区域 */
+        /* Stats */
         .stats {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -191,6 +174,7 @@
             border-top: 1px solid var(--border);
             border-left: 1px solid var(--border);
             transition: border-color var(--transition-duration) ease;
+            margin-bottom: 48px;
         }
 
         .stat-item {
@@ -223,9 +207,90 @@
             transition: color var(--transition-duration) ease;
         }
 
-        /* 链接区域 */
+        /* Projects Section */
+        .projects-section {
+            text-align: left;
+            margin-bottom: 48px;
+        }
+
+        .section-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-faint);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            text-align: center;
+            transition: color var(--transition-duration) ease;
+        }
+
+        .project-card {
+            display: flex;
+            align-items: center;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border);
+            text-decoration: none;
+            color: inherit;
+            transition: border-color var(--transition-duration) ease;
+            gap: 16px;
+        }
+
+        .project-card:last-child {
+            border-bottom: none;
+        }
+
+        .project-card:hover .project-name {
+            color: var(--text);
+        }
+
+        .project-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            flex-shrink: 0;
+            object-fit: cover;
+            background: var(--card-hover);
+        }
+
+        .project-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .project-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 3px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            transition: color var(--transition-duration) ease;
+        }
+
+        .project-desc {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.4;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            transition: color var(--transition-duration) ease;
+        }
+
+        .project-arrow {
+            color: var(--text-faint);
+            font-size: 14px;
+            transition: transform 0.2s, color var(--transition-duration) ease;
+        }
+
+        .project-card:hover .project-arrow {
+            transform: translateX(3px);
+            color: var(--text-muted);
+        }
+
+        /* Links */
         .links {
-            margin-top: 60px;
             display: flex;
             gap: 28px;
             justify-content: center;
@@ -260,24 +325,13 @@
             width: 100%;
         }
 
-        /* 响应式 */
         @media (max-width: 480px) {
-            .name {
-                font-size: 36px;
-            }
-            .motto {
-                font-size: 14px;
-            }
-            .stat-number {
-                font-size: 32px;
-            }
-            .stat-item {
-                padding: 30px 15px;
-            }
-            .theme-toggle {
-                top: 16px;
-                right: 16px;
-            }
+            .name { font-size: 36px; }
+            .motto { font-size: 14px; }
+            .stat-number { font-size: 32px; }
+            .stat-item { padding: 30px 15px; }
+            .theme-toggle { top: 16px; right: 16px; }
+            .project-name, .project-desc { white-space: normal; }
         }
     </style>
 </head>
@@ -287,12 +341,10 @@
     <div class="theme-toggle" id="themeToggle" role="switch" aria-checked="false" aria-label="切换主题">
         <div class="toggle-track">
             <div class="toggle-thumb">
-                <!-- 太阳 SVG -->
                 <svg class="toggle-icon toggle-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="12" cy="12" r="4" fill="currentColor" stroke="none"/>
                     <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
                 </svg>
-                <!-- 月亮 SVG -->
                 <svg class="toggle-icon toggle-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="currentColor" stroke="none"/>
                 </svg>
@@ -331,6 +383,37 @@
             </div>
         </div>
 
+        <div class="projects-section">
+            <div class="section-title">Featured Projects</div>
+
+            <a href="https://github.com/Evilgodxu/Mede-IDE" class="project-card" target="_blank">
+                <img src="assets/icons/MedeIDE.webp" alt="Mede IDE" class="project-icon">
+                <div class="project-info">
+                    <div class="project-name">Mede IDE</div>
+                    <div class="project-desc">Android 平台 AI 辅助代码编辑器，Jetpack Compose + 本地大模型</div>
+                </div>
+                <div class="project-arrow">→</div>
+            </a>
+
+            <a href="https://github.com/Evilgodxu/EdgeGesture" class="project-card" target="_blank">
+                <img src="assets/icons/EdgeGestures.webp" alt="Edge Gesture" class="project-icon">
+                <div class="project-info">
+                    <div class="project-name">Edge Gesture</div>
+                    <div class="project-desc">Android 边缘手势替代方案，Shizuku + 无障碍服务</div>
+                </div>
+                <div class="project-arrow">→</div>
+            </a>
+
+            <a href="https://github.com/Evilgodxu/Tier-List-Maker" class="project-card" target="_blank">
+                <img src="assets/icons/TierListMaster.webp" alt="Tier List Maker" class="project-icon">
+                <div class="project-info">
+                    <div class="project-name">Tier List Maker</div>
+                    <div class="project-desc">专业梯度表/排行榜编辑工具，批量图片管理与自定义层级</div>
+                </div>
+                <div class="project-arrow">→</div>
+            </a>
+        </div>
+
         <div class="links">
             <a href="https://github.com/Evilgodxu" target="_blank">GitHub</a>
             <a href="mailto:my2973257684@gmail.com">Email</a>
@@ -340,7 +423,7 @@
 
     <script>
         (function() {
-            // ========== 主题切换 ==========
+            // Theme Toggle
             const toggle = document.getElementById('themeToggle');
             const html = document.documentElement;
             const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
@@ -371,11 +454,10 @@
                 }
             });
 
-            // ========== 粒子背景 ==========
+            // Particle Background
             const canvas = document.getElementById('bg-canvas');
             const ctx = canvas.getContext('2d');
             let particles = [];
-            let animationId;
             let isDark = html.getAttribute('data-theme') === 'dark';
 
             function resizeCanvas() {
@@ -385,25 +467,18 @@
 
             class Particle {
                 constructor() {
-                    this.reset();
-                }
-
-                reset() {
                     this.x = Math.random() * canvas.width;
                     this.y = Math.random() * canvas.height;
                     this.vx = (Math.random() - 0.5) * 0.3;
                     this.vy = (Math.random() - 0.5) * 0.3;
                     this.radius = Math.random() * 1.5 + 0.5;
                 }
-
                 update() {
                     this.x += this.vx;
                     this.y += this.vy;
-
                     if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
                     if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
                 }
-
                 draw() {
                     ctx.beginPath();
                     ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
@@ -415,9 +490,7 @@
             function initParticles() {
                 particles = [];
                 const count = Math.min(80, Math.floor((canvas.width * canvas.height) / 15000));
-                for (let i = 0; i < count; i++) {
-                    particles.push(new Particle());
-                }
+                for (let i = 0; i < count; i++) particles.push(new Particle());
             }
 
             function drawLines() {
@@ -427,15 +500,12 @@
                         const dx = particles[i].x - particles[j].x;
                         const dy = particles[i].y - particles[j].y;
                         const dist = Math.sqrt(dx * dx + dy * dy);
-
                         if (dist < maxDist) {
                             const opacity = (1 - dist / maxDist) * (isDark ? 0.08 : 0.12);
                             ctx.beginPath();
                             ctx.moveTo(particles[i].x, particles[i].y);
                             ctx.lineTo(particles[j].x, particles[j].y);
-                            ctx.strokeStyle = isDark 
-                                ? `rgba(255,255,255,${opacity})` 
-                                : `rgba(0,0,0,${opacity})`;
+                            ctx.strokeStyle = isDark ? `rgba(255,255,255,${opacity})` : `rgba(0,0,0,${opacity})`;
                             ctx.lineWidth = 0.5;
                             ctx.stroke();
                         }
@@ -446,27 +516,15 @@
             function animate() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 isDark = html.getAttribute('data-theme') === 'dark';
-
-                particles.forEach(p => {
-                    p.update();
-                    p.draw();
-                });
-
+                particles.forEach(p => { p.update(); p.draw(); });
                 drawLines();
-                animationId = requestAnimationFrame(animate);
+                requestAnimationFrame(animate);
             }
 
-            // 监听主题变化更新粒子颜色
-            const observer = new MutationObserver(() => {
-                isDark = html.getAttribute('data-theme') === 'dark';
-            });
+            const observer = new MutationObserver(() => { isDark = html.getAttribute('data-theme') === 'dark'; });
             observer.observe(html, { attributes: true, attributeFilter: ['data-theme'] });
 
-            window.addEventListener('resize', () => {
-                resizeCanvas();
-                initParticles();
-            });
-
+            window.addEventListener('resize', () => { resizeCanvas(); initParticles(); });
             resizeCanvas();
             initParticles();
             animate();
