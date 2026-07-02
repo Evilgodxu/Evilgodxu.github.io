@@ -325,6 +325,105 @@
             width: 100%;
         }
 
+        /* Donation Section */
+        .donation-section {
+            margin-bottom: 48px;
+        }
+
+        .donor-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .donor-card {
+            padding: 16px 8px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .donor-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border-color: var(--text-muted);
+        }
+
+        [data-theme="dark"] .donor-card:hover {
+            box-shadow: 0 4px 12px rgba(255,255,255,0.05);
+        }
+
+        .donor-card.top-1 {
+            border-color: #c9a84c;
+            background: linear-gradient(135deg, rgba(201,168,76,0.08) 0%, transparent 100%);
+        }
+
+        .donor-card.top-2 {
+            border-color: #a8a8a8;
+            background: linear-gradient(135deg, rgba(168,168,168,0.08) 0%, transparent 100%);
+        }
+
+        .donor-card.top-3 {
+            border-color: #cd7f32;
+            background: linear-gradient(135deg, rgba(205,127,50,0.08) 0%, transparent 100%);
+        }
+
+        .donor-rank {
+            font-size: 11px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            letter-spacing: 1px;
+        }
+
+        .donor-card.top-1 .donor-rank { color: #c9a84c; }
+        .donor-card.top-2 .donor-rank { color: #a8a8a8; }
+        .donor-card.top-3 .donor-rank { color: #cd7f32; }
+        .donor-card:not(.top-1):not(.top-2):not(.top-3) .donor-rank { color: var(--text-faint); }
+
+        .donor-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text);
+            line-height: 1.3;
+        }
+
+        .donor-card.top-1 .donor-name {
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .donor-card.top-2 .donor-name,
+        .donor-card.top-3 .donor-name {
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .donor-crown {
+            position: absolute;
+            top: 4px;
+            right: 6px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 640px) {
+            .donor-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .donor-card.top-1 {
+                grid-column: span 1;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .donor-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
         @media (max-width: 480px) {
             .name { font-size: 36px; }
             .motto { font-size: 14px; }
@@ -402,6 +501,33 @@
                 </div>
                 <div class="project-arrow">→</div>
             </a>
+        </div>
+
+        <div class="donation-section">
+            <div class="section-title">Thanks for the support</div>
+            <div class="donor-grid">
+                <div class="donor-card top-1">
+                    <div class="donor-crown">👑</div>
+                    <div class="donor-rank">TOP 1</div>
+                    <div class="donor-name">漠然</div>
+                </div>
+                <div class="donor-card top-2">
+                    <div class="donor-rank">TOP 2</div>
+                    <div class="donor-name">吾思妻</div>
+                </div>
+                <div class="donor-card top-3">
+                    <div class="donor-rank">TOP 3</div>
+                    <div class="donor-name">徐惶</div>
+                </div>
+                <div class="donor-card">
+                    <div class="donor-rank">TOP 4</div>
+                    <div class="donor-name">垣棠丶</div>
+                </div>
+                <div class="donor-card">
+                    <div class="donor-rank">TOP 5</div>
+                    <div class="donor-name">**雨</div>
+                </div>
+            </div>
         </div>
 
         <div class="links">
@@ -515,7 +641,7 @@
             const observer = new MutationObserver(() => { isDark = html.getAttribute('data-theme') === 'dark'; });
             observer.observe(html, { attributes: true, attributeFilter: ['data-theme'] });
 
-            window.addEventListener('resize', () => { resizeCanvas(); initParticles(); });
+            window.addEventListener('resize', () => { resizeCanvas(); });
             resizeCanvas();
             initParticles();
             animate();
